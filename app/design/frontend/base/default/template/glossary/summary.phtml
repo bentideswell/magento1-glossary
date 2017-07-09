@@ -1,0 +1,40 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Glossary
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<div class="block block-glossary">
+	<div class="block-title">
+		<strong><span><?php echo $this->__($this->escapeHtml($this->getTitle())) ?></span></strong>
+	</div>
+	<div class="block-content" id="<?php echo $this->getWrapperId() ?>"></div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	(function() {
+		 document.observe("dom:loaded", function() {
+			var wrapper = $('<?php echo $this->getWrapperId() ?>');
+			var words = $$('a.gls');
+			var list = new Element('ul');
+			
+			if (words.length > 0) {
+				words.each(function(elem) {
+					list.insert(new Element('li', {'class': 'item'}).update(
+						new Element('a', {'href': elem.readAttribute('href')}).update(elem.innerHTML)
+					));
+				});
+
+				wrapper.insert(list);
+				
+				decorateList(list);
+			}
+			else {
+				wrapper.remove();
+			}
+		 });
+	 })();
+//]]>
+</script>

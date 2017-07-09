@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<layout>
+	<!--
+	/**
+	 * Glossary Dashboard
+	 */
+	 -->
+	<adminhtml_glossary_index>
+		<reference name="content">
+			<block type="core/text" name="glossary.dashboard.title">
+				<action method="setText">
+					<text><![CDATA[<div class="content-header"><h3>Glossary</h3></div>]]></text>
+				</action>
+			</block>
+			<block type="glossary/adminhtml_dashboard" name="glossary.dashboard" />
+			<block type="core/text" name="glossary.tabs.content">
+				<action method="setText">
+					<text><![CDATA[
+						<div id="glossary_tab_content"></div>
+						<style type="text/css">
+							#glossary_dashboard_tabs_word_content .content-header { display: none; }
+						</style>
+					]]></text>
+				</action>
+			</block>
+		</reference>
+	</adminhtml_glossary_index>
+	<!--
+	/**
+	 * Glossary Word edit
+	 */
+	 -->
+	<adminhtml_glossary_word_edit>
+		<update handle="editor" />
+		<reference name="left">
+			<block type="glossary/adminhtml_word_edit_tabs" name="glossary_word.edit.tabs" />
+		</reference>
+		<reference name="content">
+			<block type="glossary/adminhtml_word_edit" name="glossary_word.edit" />
+		</reference>
+	</adminhtml_glossary_word_edit>
+</layout>

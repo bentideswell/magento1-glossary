@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Fishpig_Glossary>
+			<active>true</active>
+			<codePool>community</codePool>
+		</Fishpig_Glossary>
+		<Fishpig_Glossary_FPAdmin>
+			<active>true</active>
+			<codePool>community</codePool>
+		</Fishpig_Glossary_FPAdmin>
+	</modules>
+</config>

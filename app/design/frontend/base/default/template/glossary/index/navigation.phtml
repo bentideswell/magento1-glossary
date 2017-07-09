@@ -1,0 +1,21 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Glossary
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php if ($letters = $this->getLetters()): ?>
+	<ul class="glossary-navigation">
+		<?php foreach($letters as $letter => $hasWords): ?>
+			<li class="item">
+				<?php if ($hasWords === true): ?>
+					<a href="#<?php echo $letter ?>"><?php echo $letter ?></a>
+				<?php else: ?>
+					<span><?php echo $letter ?></span>
+				<?php endif; ?>
+			</li>
+		<?php endforeach; ?>
+	</ul>
+<?php endif; ?>

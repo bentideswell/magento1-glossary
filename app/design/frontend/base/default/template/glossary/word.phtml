@@ -1,0 +1,15 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Glossary
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $word = $this->getWord() ?>
+<div class="page-title">
+	<h1><?php echo $this->escapeHtml($word->getWord()) ?></h1>
+</div>
+<div class="glossary-word">
+	<?php echo $word->getDefinition() ?>
+</div>

@@ -1,0 +1,28 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Glossary
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<div class="page-title">
+	<h1><?php echo $this->__('Glossary') ?></h1>
+</div>
+<?php if ($words = $this->getWords()): ?>
+	<?php echo $this->getNavigationHtml() ?>
+	<ul class="word-list">
+		<?php foreach($words as $word): ?>
+			<li class="item">
+				<h2<?php if ($this->canPrintAnchor($word->getFirstCharacter())): ?> id="<?php echo $word->getFirstCharacter() ?>"<?php endif; ?>>
+					<a href="<?php echo $word->getUrl() ?>" title="<?php echo $this->escapeHtml($word->getWord()) ?>">
+						<span><?php echo $this->escapeHtml($word->getWord()) ?></span>
+					</a>
+				</h2>
+				<?php if ($shortDefinition = $word->getShortDefinition()): ?>
+					<p><?php echo nl2br($shortDefinition) ?></p>
+				<?php endif; ?>
+			</li>
+		<?php endforeach; ?>	
+	</ul>
+<?php endif; ?>

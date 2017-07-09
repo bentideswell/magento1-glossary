@@ -1,0 +1,43 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Glossary
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<script type="text/javascript">
+//<![CDATA[
+ (function() {
+	var lib = new Element('script', {'src': '<?php echo Mage::getBaseUrl('js') . 'fishpig/glossary/wz_tooltip/wz_tooltip.js' ?>', 'type': 'text/javascript'});
+	var data = <?php echo $this->getJsonDataObject() ?>;
+
+	Event.observe(lib, 'load', function(event) {
+		var links = $$('a.gls');
+		
+		links.each(function(elem) {
+			var m = elem.readAttribute('class').match(/gls-([0-9]+)/);
+
+			if (m) {
+				elem.writeAttribute('word_id', m[1]);
+			}
+		});
+		
+		links.invoke('observe', 'mouseover', function(event) {
+			var elem = Event.element(event);
+			var def = elem.readAttribute('definition');
+
+			if (!def) {
+				def = data[elem.readAttribute('word_id')];
+			}
+			
+			Tip(def<?php echo $this->getWzTooltipExtra() ?>);
+		});
+		
+		links.invoke('observe', 'mouseout', UnTip);
+	});
+	
+	$$('body').first().insert(lib);
+})();
+//]]>
+</script>
