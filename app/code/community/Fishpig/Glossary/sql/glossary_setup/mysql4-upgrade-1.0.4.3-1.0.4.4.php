@@ -4,6 +4,7 @@
  * @package     Fishpig_Glossary
  * @license     http://fishpig.co.uk/license.txt
  * @author      Ben Tideswell <help@fishpig.co.uk>
+ * @SkipObfuscation
  */
 	
 	$this->startSetup();
