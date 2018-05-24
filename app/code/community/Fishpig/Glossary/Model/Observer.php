@@ -69,6 +69,7 @@ class Fishpig_Glossary_Model_Observer
 	 */	
 	public function injectWordLinksObserver(Varien_Event_Observer $observer)
 	{
+
 		if (!Mage::helper('glossary')->canAutolink() || !$this->isValidRoute()) {
 			return $this;
 		}
@@ -392,9 +393,27 @@ class Fishpig_Glossary_Model_Observer
 	 */
 	public function isValidRoute()
 	{
+		$request = Mage::app()->getRequest();
 		$allowedModules = Mage::helper('glossary')->getAutolinkAllowedModules();
 		
-		return in_array(Mage::app()->getRequest()->getModuleName(), $allowedModules);
+		if (!in_array($request->getModuleName(), $allowedModules)) {
+			return false;
+		}
+		
+		if (!($disallowedRoutes = trim(Mage::getStoreConfig('glossary/autolink/disallowed_routes')))) {
+			return false;
+		}
+		
+		$disallowedRoutes = explode("\n", strtolower($disallowedRoutes));
+		$currentRoute = strtolower($request->getModuleName() . '_' . $request->getControllerName() . '_' . $request->getActionName());
+				
+		foreach($disallowedRoutes as $disallowedRoute) {
+			if ($disallowedRoute === $currentRoute) {
+				return false;
+			}
+		}
+		
+		return true;
 	}	
 }
 
