@@ -173,7 +173,14 @@ class Fishpig_Glossary_Model_Observer
 	 */
 	protected function _processRawHtml($html)
 	{
+		// Remove existing comments
+		$html = $this->_pregReplaceCallback('/(<!--.*-->)/Us', array($this, 'addToSafe'), trim($html));
+		
 		// Remove everything but the body tag
+		$html = $this->_pregReplaceCallback('/^(.*<body[^>]*>)/Us', array($this, 'addToSafe'), trim($html));
+		$html = $this->_pregReplaceCallback('/(<\/body>.*)$/Us', array($this, 'addToSafe'), trim($html));		
+
+
 		$html = $this->_pregReplaceCallback(sprintf("/(^.*%s)/Us", preg_quote(self::INCLUDE_TAG_START)), array($this, 'addToSafe'), trim($html));
 		$html = $this->_pregReplaceCallback(sprintf("/(%s.*$)/Us", preg_quote(self::INCLUDE_TAG_END)), array($this, 'addToSafe'), trim($html));
 
@@ -401,7 +408,7 @@ class Fishpig_Glossary_Model_Observer
 		}
 		
 		if (!($disallowedRoutes = trim(Mage::getStoreConfig('glossary/autolink/disallowed_routes')))) {
-			return false;
+			return true;
 		}
 		
 		$disallowedRoutes = explode("\n", strtolower($disallowedRoutes));
