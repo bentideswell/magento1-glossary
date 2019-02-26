@@ -10,19 +10,17 @@
 	<h1><?php echo $this->__('Glossary') ?></h1>
 </div>
 <?php if ($words = $this->getWords()): ?>
-	<?php echo $this->getNavigationHtml() ?>
-	<ul class="word-list">
-		<?php foreach($words as $word): ?>
-			<li class="item">
-				<h2<?php if ($this->canPrintAnchor($word->getFirstCharacter())): ?> id="<?php echo $word->getFirstCharacter() ?>"<?php endif; ?>>
-					<a href="<?php echo $word->getUrl() ?>" title="<?php echo $this->escapeHtml($word->getWord()) ?>">
-						<span><?php echo $this->escapeHtml($word->getWord()) ?></span>
-					</a>
-				</h2>
-				<?php if ($shortDefinition = $word->getShortDefinition()): ?>
-					<p><?php echo nl2br($shortDefinition) ?></p>
+	<div class="gls">
+		<?php echo $this->getNavigationHtml() ?>
+		<ul class="word-list">
+			<?php foreach($words as $word): ?>
+				<?php if ($this->canPrintAnchor($word->getFirstCharacter())): ?>
+					<li id="<?php echo $word->getFirstCharacter() ?>" class="title"><span><?php echo $word->getFirstCharacter() ?></span> <a href="#top"><?php echo $this->__('Back to top') ?></a></li>
 				<?php endif; ?>
-			</li>
-		<?php endforeach; ?>	
-	</ul>
+				<li class="item">
+					<p><a href="<?php echo $word->getUrl() ?>" title="<?php echo $this->escapeHtml($word->getWord()) ?>"><?php echo $this->escapeHtml($word->getWord()) ?></a><?php if ($shortDefinition = $word->getShortDefinition()): ?> - <?php echo nl2br($shortDefinition) ?><?php endif; ?>
+				</li>
+			<?php endforeach; ?>	
+		</ul>
+	</div>
 <?php endif; ?>

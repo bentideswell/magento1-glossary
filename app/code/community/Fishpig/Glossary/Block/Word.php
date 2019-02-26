@@ -21,4 +21,14 @@ class Fishpig_Glossary_Block_Word extends Mage_Core_Block_Template
 		
 		return $this->_getData('word');
 	}
+	
+	/*
+	 *
+	 *
+	 * @return string
+	 */
+	public function getGlossaryUrl()
+	{
+		return Mage::helper('glossary')->getIndexUrl();
+	}
 }
