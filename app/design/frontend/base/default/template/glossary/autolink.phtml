@@ -9,6 +9,12 @@
 <script type="text/javascript">
 //<![CDATA[
  (function() {
+    if ( typeof window.fishpigGlossaryIncluded !== 'undefined') {
+        return;
+    }
+
+    window.fishpigGlossaryIncluded = true;
+    
 	var lib = new Element('script', {'src': '<?php echo Mage::getBaseUrl('js') . 'fishpig/glossary/wz_tooltip/wz_tooltip.js' ?>', 'type': 'text/javascript'});
 	var data = <?php echo $this->getJsonDataObject() ?>;
 

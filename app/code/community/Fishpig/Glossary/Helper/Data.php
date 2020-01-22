@@ -114,16 +114,6 @@ class Fishpig_Glossary_Helper_Data extends Mage_Core_Helper_Abstract
 	}
 	
 	/**
-	 * Determine whether to clean the HTML
-	 *
-	 * @return bool
-	 */
-	public function canCleanHtml()
-	{
-		return Mage::getStoreConfigFlag('glossary/autolink/clean_html');
-	}
-	
-	/**
 	 * Retrieve a config value
 	 *
 	 * @param string $key

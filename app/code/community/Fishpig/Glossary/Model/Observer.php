@@ -73,9 +73,7 @@ class Fishpig_Glossary_Model_Observer
 			return $this;
 		}
 
-		$words = $this->getWords();
-		
-		if (!$words) {
+		if (!($words = $this->getWords())) {
 			return $this;
 		}
 
@@ -193,11 +191,9 @@ class Fishpig_Glossary_Model_Observer
 			$html = $this->_pregReplaceCallback('/(<' . $tag . '[^>]{0,}>.*<\/' . $tag . '>)/iUs', array($this, 'addToSafe'), $html);
 		}
 
-        if (Mage::helper('glossary')->canCleanHtml()) {
-    		// Clean the HTML
-    		$html = preg_replace("/(\n|\r|\t)/", ' ', $html);
-    		$html = preg_replace('/([ ]{1,})/', ' ', $html);
-        }
+		// Clean the HTML
+		$html = preg_replace("/(\n|\r|\t)/", ' ', $html);
+		$html = preg_replace('/([ ]{1,})/',  ' ', $html);
         
 		// Strip headings
 		$html = $this->_pregReplaceCallback('/(<h[1-6]{1}[^>]{0,}>.*<\/h[1-6]{1}>)/iU', array($this, 'addToSafe'), $html);
@@ -401,6 +397,10 @@ class Fishpig_Glossary_Model_Observer
 	 */
 	public function isValidRoute()
 	{
+    	if ($this->isAjax()) {
+        	return false;
+    	}
+
 		$request = Mage::app()->getRequest();
 		$allowedModules = Mage::helper('glossary')->getAutolinkAllowedModules();
 		
@@ -422,6 +422,16 @@ class Fishpig_Glossary_Model_Observer
 		}
 		
 		return true;
-	}	
+	}
+	
+	/**
+	 * Determine whether the current request is an ajax request
+	 *
+	 * @return bool
+	 */
+	public function isAjax()
+	{
+		return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+	}
 }
 
