@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Fishpig_Glossary>
-			<version>1.0.4.17</version>
+			<version>1.0.4.18</version>
 		</Fishpig_Glossary>
 	</modules>
 	<global>
@@ -123,6 +123,7 @@
 				<allowed_modules>glossary,glossarypro,wordpress,catalog,catalogsearch,cms,contacts,review,tag</allowed_modules>
 				<library>wz_tooltip</library>
 				<wz_tooltip_extra><![CDATA[a:5:{s:18:"_1390848011760_760";a:2:{s:7:"command";s:7:"PADDING";s:5:"value";s:2:"10";}s:18:"_1390848476716_716";a:2:{s:7:"command";s:7:"BGCOLOR";s:5:"value";s:4:"#fff";}s:18:"_1390848490913_913";a:2:{s:7:"command";s:5:"WIDTH";s:5:"value";s:4:"-500";}s:18:"_1390848594263_263";a:2:{s:7:"command";s:11:"BORDERCOLOR";s:5:"value";s:4:"#333";}s:18:"_1390848600495_495";a:2:{s:7:"command";s:6:"SHADOW";s:5:"value";s:4:"true";}}]]></wz_tooltip_extra>
+				<clean_html>1</clean_html>
 			</autolink>
 		</glossary>
 	</default>

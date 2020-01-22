@@ -69,7 +69,6 @@ class Fishpig_Glossary_Model_Observer
 	 */	
 	public function injectWordLinksObserver(Varien_Event_Observer $observer)
 	{
-
 		if (!Mage::helper('glossary')->canAutolink() || !$this->isValidRoute()) {
 			return $this;
 		}
@@ -194,10 +193,12 @@ class Fishpig_Glossary_Model_Observer
 			$html = $this->_pregReplaceCallback('/(<' . $tag . '[^>]{0,}>.*<\/' . $tag . '>)/iUs', array($this, 'addToSafe'), $html);
 		}
 
-		// Clean the HTML
-		$html = preg_replace("/(\n|\r|\t)/", ' ', $html);
-		$html = preg_replace('/([ ]{1,})/', ' ', $html);
-
+        if (Mage::helper('glossary')->canCleanHtml()) {
+    		// Clean the HTML
+    		$html = preg_replace("/(\n|\r|\t)/", ' ', $html);
+    		$html = preg_replace('/([ ]{1,})/', ' ', $html);
+        }
+        
 		// Strip headings
 		$html = $this->_pregReplaceCallback('/(<h[1-6]{1}[^>]{0,}>.*<\/h[1-6]{1}>)/iU', array($this, 'addToSafe'), $html);
 
